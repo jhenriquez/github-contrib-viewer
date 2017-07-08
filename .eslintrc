@@ -6,7 +6,8 @@
     "env": {
         "jest": true,
         "es6": true,
-        "node": true
+        "node": true,
+        "browser": true
     },
     "parser": "babel-eslint",
     "parserOptions": {
@@ -15,5 +16,8 @@
         },
         "sourceType": "module"
     },
-    "plugins": ["react"]
+    "plugins": ["react"],
+    "rules": {
+        "semi":"error"
+    }
 }
