@@ -8,7 +8,9 @@ module.exports = {
   entry: {
     app: path.resolve(srcDir, 'app', 'root.jsx'),
     vendor: [
-      'babel-polyfill'
+      'babel-polyfill',
+      'react',
+      'react-dom'
     ]
   },
 
@@ -18,11 +20,21 @@ module.exports = {
   },
 
   module: {
-    rules: [{
-      test: /\.jsx?/,
-      include: [srcDir],
-      loader: 'babel-loader'
-    }]
+    rules: [
+      {
+        test: /\.jsx?/,
+        include: [srcDir],
+        loader: 'babel-loader'
+      },
+      {
+        test: /\.css/,
+        include: [srcDir],
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'css-loader' }
+        ]
+      }
+    ]
   },
 
   resolve: {
@@ -44,6 +56,7 @@ module.exports = {
       }
     }
   },
+
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({ name: "vendor" }),
     new HtmlWebpackPlugin({
