@@ -42,6 +42,7 @@
     }
   },
   "eslintIgnore": [
-    "flow-typed/"
+    "flow-typed/",
+    "coverage/"
   ]
 }

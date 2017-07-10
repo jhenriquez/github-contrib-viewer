@@ -1,7 +1,7 @@
 [ignore]
-.*/public/*
 .*/node_modules/*
 .*/specs/preProcessWebpackAlias.js
+.*/coverage/*
 
 [include]
 
