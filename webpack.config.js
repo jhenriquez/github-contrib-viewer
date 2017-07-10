@@ -42,7 +42,11 @@ module.exports = {
       path.resolve(__dirname, 'node_modules'),
       srcDir
     ],
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx'],
+    alias: {
+      components: path.resolve(srcDir, 'app/components'),
+      containers: path.resolve(srcDir, 'app/containers')
+    }
   },
 
   devtool: 'source-map',

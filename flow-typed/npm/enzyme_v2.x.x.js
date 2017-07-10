@@ -5,7 +5,7 @@ declare module 'enzyme' {
   declare type PredicateFunction = (wrapper: Wrapper<any>) => boolean;
   declare type NodeOrNodes = React$Element<any> | Array<React$Element<any>>;
   declare class Wrapper<ReturnClass: Wrapper<any>> {
-    find(selector: string): ReturnClass;
+    find(selector: string | ComponentClass): ReturnClass;
     findWhere(predicate: PredicateFunction): ReturnClass;
     filter(selector: string): ReturnClass;
     filterWhere(predicate: PredicateFunction): ReturnClass;

@@ -1,6 +1,7 @@
 [ignore]
 .*/public/*
 .*/node_modules/*
+.*/specs/*
 
 [include]
 
@@ -8,3 +9,6 @@
 
 [options]
 all=true
+
+module.name_mapper='^components\/\(.*\)$' -> '<PROJECT_ROOT>/src/app/components/\1'
+module.name_mapper='^containers\/\(.*\)$' -> '<PROJECT_ROOT>/src/app/containers/\1'
