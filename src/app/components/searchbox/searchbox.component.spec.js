@@ -8,6 +8,11 @@ describe('<SearchBox />', () => {
     mount(<SearchBox />);
   });
 
+  test('It defaults "value" to ""', () => {
+    const component = mount(<SearchBox />);
+    expect(component.props().value).toEqual("");
+  });
+
   describe('<input>', () => {
 
     test('It renders an <input> element', () => {

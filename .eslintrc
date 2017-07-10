@@ -19,5 +19,8 @@
     "plugins": ["react"],
     "rules": {
         "semi":"error"
+    },
+    "globals": {
+        "SyntheticInputEvent": true
     }
 }
