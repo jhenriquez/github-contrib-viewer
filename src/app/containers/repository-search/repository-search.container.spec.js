@@ -44,9 +44,18 @@ describe('RespositorySearch', () => {
 
     });
 
-    test('It renders a <SearchResults /> component', () => {
-      const component = mount(<RepositorySearch />);
-      expect(component.find(SearchResults)).toHaveLength(1);
+    describe('<SearchResults />', () => {
+      test('It renders a <SearchResults /> component', () => {
+        const component = mount(<RepositorySearch />);
+        expect(component.find(SearchResults)).toHaveLength(1);
+      });
+
+      test('It binds "results" prop to its own "search.results" prop.', () => {
+        const component = mount(<RepositorySearch />);
+        component.setProps({ search: { results: [1,2,3] } });
+        const searchResults = component.find(SearchResults);
+        expect(searchResults.props().results).toEqual([1,2,3]);
+      });
     });
 
   });

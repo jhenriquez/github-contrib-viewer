@@ -23,7 +23,7 @@ export class RepositorySearch extends Component<PropType, PropType, void> {
     return (
       <div className="repository-search">
         <SearchBox value={ this.props.search.text } onChange={ this.onSearchBoxChange.bind(this)  } />
-        <SearchResults />
+        <SearchResults results={ this.props.search.results } />
       </div>
     );
   }
