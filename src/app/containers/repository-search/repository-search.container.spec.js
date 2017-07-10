@@ -22,15 +22,33 @@ describe('RespositorySearch', () => {
 
     });
 
-    test('It renders a <SearchBox /> component.', () => {
-      const component = mount(<RepositorySearch />);
-      expect(component.find(SearchBox)).toHaveLength(1);
+    describe('<SearchBox />', () => {
+
+      test('It renders a <SearchBox /> component.', () => {
+        const component = mount(<RepositorySearch />);
+        expect(component.find(SearchBox)).toHaveLength(1);
+      });
+
+      test('It binds "value" prop to the its own "search.text" prop.', () => {
+        const component = mount(<RepositorySearch />);
+        component.setProps({ search: { text: 'Some value' } });
+        const searchBox = component.find(SearchBox);
+        expect(searchBox.props().value).toEqual("Some value");
+      });
+
+      test('It binds to the onChange event', () => {
+        const component = mount(<RepositorySearch />);
+        const searchBox = component.find(SearchBox);
+        expect(searchBox.props().onChange).toBeDefined();
+      });
+
     });
 
     test('It renders a <SearchResults /> component', () => {
       const component = mount(<RepositorySearch />);
       expect(component.find(SearchResults)).toHaveLength(1);
     });
+
   });
 
 });

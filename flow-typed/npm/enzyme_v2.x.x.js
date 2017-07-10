@@ -21,6 +21,7 @@ declare module 'enzyme' {
     html(): string;
     update(): this;
     props(props?: any) : any;
+    setProps(props: Object): this;
   }
   declare class ReactWrapper<ReactWrapper> extends Wrapper<any> {}
   declare class ShallowWrapper<ShallowWrapper> extends Wrapper<any> {

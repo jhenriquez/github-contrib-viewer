@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import SearchBox from 'components/searchbox';
 import SearchResults from 'components/search-results';
 
-type DefaultPropType = {
+type PropType = {
   search: {
     isSearching: boolean;
     results: Array<any>;
@@ -11,13 +11,18 @@ type DefaultPropType = {
   }
 };
 
-export class RepositorySearch extends Component<DefaultPropType, {}, void> {
-  static defaultProps: DefaultPropType;
+export class RepositorySearch extends Component<PropType, PropType, void> {
+  static defaultProps: PropType;
+
+  /**
+   * This function is a place holder. This should be no more than redux event dispatch.
+   */
+  onSearchBoxChange () { }
 
   render () {
     return (
       <div className="repository-search">
-        <SearchBox />
+        <SearchBox value={ this.props.search.text } onChange={ this.onSearchBoxChange.bind(this)  } />
         <SearchResults />
       </div>
     );

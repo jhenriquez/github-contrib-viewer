@@ -41,5 +41,7 @@
       ".*": "<rootDir>/specs/preProcessWebpackAlias.js"
     }
   },
-  "eslintIgnore": ["flow-typed/"]
+  "eslintIgnore": [
+    "flow-typed/"
+  ]
 }
