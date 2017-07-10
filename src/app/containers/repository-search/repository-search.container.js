@@ -3,10 +3,13 @@ import React, { Component } from 'react';
 import SearchBox from 'components/searchbox';
 import SearchResults from 'components/search-results';
 
+import type { IRepository } from 'models/repository.model';
+import type { IOrganization } from 'models/organization.model';
+
 type PropType = {
   search: {
     isSearching: boolean;
-    results: Array<any>;
+    results: Array<IRepository | IOrganization>;
     text: string;
   }
 };
