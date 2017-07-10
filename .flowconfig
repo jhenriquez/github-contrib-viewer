@@ -1,7 +1,7 @@
 [ignore]
 .*/public/*
 .*/node_modules/*
-.*/specs/*
+.*/specs/preProcessWebpackAlias.js
 
 [include]
 
@@ -12,3 +12,5 @@ all=true
 
 module.name_mapper='^components\/\(.*\)$' -> '<PROJECT_ROOT>/src/app/components/\1'
 module.name_mapper='^containers\/\(.*\)$' -> '<PROJECT_ROOT>/src/app/containers/\1'
+module.name_mapper='^models\/\(.*\)$' -> '<PROJECT_ROOT>/src/app/models/\1'
+module.name_mapper='^mocks\/\(.*\)$' -> '<PROJECT_ROOT>/specs/mocks/\1'
