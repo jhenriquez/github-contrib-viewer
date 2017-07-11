@@ -1,9 +1,13 @@
 import React from 'react';
 import { mount } from 'enzyme';
+import { Provider } from 'react-redux';
 
-import { RepositorySearch } from './repository-search.container';
+import { default as RepositorySearchDefault, RepositorySearch, mapStateToProps, mapDispatchToProps } from './repository-search.container';
 import SearchBox from 'components/searchbox';
 import SearchResults from 'components/search-results';
+import { getApplicationInitialState } from 'store/index';
+import { getInitialState } from 'reducers/search.reducer';
+import * as SearchActions from 'actions/search.actions';
 
 describe('RespositorySearch', () => {
 
@@ -11,15 +15,7 @@ describe('RespositorySearch', () => {
 
     test('Props: { search: { isSearching: false, results: [], text: "" } }(', () => {
       const component = mount(<RepositorySearch />);
-
-      expect(component.props()).toEqual({
-        search: {
-          isSearching: false,
-          results: [],
-          text: ''
-        }
-      });
-
+      expect(component.props()).toEqual(expect.objectContaining(getInitialState()));
     });
 
     describe('<SearchBox />', () => {
@@ -29,9 +25,9 @@ describe('RespositorySearch', () => {
         expect(component.find(SearchBox)).toHaveLength(1);
       });
 
-      test('It binds "value" prop to the its own "search.text" prop.', () => {
+      test('It binds "value" prop to the its own "text" prop.', () => {
         const component = mount(<RepositorySearch />);
-        component.setProps({ search: { text: 'Some value' } });
+        component.setProps({ text: 'Some value' });
         const searchBox = component.find(SearchBox);
         expect(searchBox.props().value).toEqual("Some value");
       });
@@ -50,14 +46,38 @@ describe('RespositorySearch', () => {
         expect(component.find(SearchResults)).toHaveLength(1);
       });
 
-      test('It binds "results" prop to its own "search.results" prop.', () => {
+      test('It binds "results" prop to its own "results" prop.', () => {
         const component = mount(<RepositorySearch />);
-        component.setProps({ search: { results: [1,2,3] } });
+        component.setProps({ results: [1,2,3] });
         const searchResults = component.find(SearchResults);
         expect(searchResults.props().results).toEqual([1,2,3]);
       });
     });
 
+  });
+
+  describe('Redux', () => {
+    test('mapStateToProps: It maps to the search attribute in the state', () => {
+      const componentProps = mapStateToProps(getApplicationInitialState());
+      expect(componentProps).toEqual(getInitialState());
+    });
+
+    describe('mapDispatchToProps', () => {
+      let dispatch = jest.fn();
+
+      afterEach(() => {
+        dispatch = jest.fn();
+      });
+
+      test('It maps a "searchTextChanged" prop that calls dispatch with a SearchTextChanged action.', () => {
+        const textUpdate = "Some Value";
+        const componentDispatchProps = mapDispatchToProps(dispatch);
+        expect(componentDispatchProps.searchTextChanged).toBeDefined();
+        componentDispatchProps.searchTextChanged(textUpdate);
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenCalledWith(new SearchActions.SearchTextChanged(textUpdate));
+      });
+    });
   });
 
 });

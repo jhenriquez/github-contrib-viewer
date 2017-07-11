@@ -10,7 +10,9 @@ module.exports = {
     vendor: [
       'babel-polyfill',
       'react',
-      'react-dom'
+      'react-dom',
+      'redux',
+      'react-redux'
     ]
   },
 
@@ -47,8 +49,10 @@ module.exports = {
       actions: path.resolve(srcDir, 'app/actions'),
       components: path.resolve(srcDir, 'app/components'),
       containers: path.resolve(srcDir, 'app/containers'),
+      middlewares: path.resolve(srcDir, 'app/middlewares'),
       models: path.resolve(srcDir, 'app/models'),
       reducers: path.resolve(srcDir, 'app/reducers'),
+      store: path.resolve(srcDir, 'app/store'),
       mocks: path.resolve(__dirname, 'specs/mocks')
     }
   },
