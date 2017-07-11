@@ -1,7 +1,17 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 
-export default class RepositoryResult extends Component<void, {}, void> {
+import type { IRepository } from 'models/repository.model';
+
+type PropType = {
+  repository: IRepository;
+};
+
+export default class RepositoryResult extends Component<void, PropType, void> {
   render () {
-    return null;
+    return (
+      <div className="search-results__item">
+        <h3>{ this.props.repository.name }</h3>
+      </div>
+    );
   }
 }

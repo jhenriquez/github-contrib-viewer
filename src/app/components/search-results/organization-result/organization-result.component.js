@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
 
-export default class OrganizationResult extends Component<void, {}, void> {
-  render () {
-    return (<div className="search-results__item">
+import type { IOrganization } from 'models/organization.model';
 
+type PropType = {
+  org: IOrganization
+};
+
+export default class OrganizationResult extends Component<void, PropType, void> {
+  render () {
+    return (
+      <div className="search-results__item">
+        <h3>{ this.props.org.login }</h3>
       </div>
     );
   }
