@@ -9,6 +9,7 @@ describe('Model: Repository', () => {
 
     test('Provided a github API repository object it creates a valid Repository model.', () => {
       const repository = new Repository(mockRepository);
+      expect(repository.id).toEqual(mockRepository.id);
       expect(repository.url).toEqual(mockRepository.url);
       expect(repository.contributorsUrl).toEqual(mockRepository.contributors_url);
       expect(repository.createdAt).toEqual(mockRepository.created_at);

@@ -9,6 +9,7 @@ describe('Model: Repository', () => {
 
     test('Provided a github API organization object it creates a valid Organization model.', () => {
       const organization = new Organization(mockOrganization);
+      expect(organization.id).toEqual(mockOrganization.id);
       expect(organization.url).toEqual(mockOrganization.url);
       expect(organization.login).toEqual(mockOrganization.login);
       expect(organization.avatarUrl).toEqual(mockOrganization.avatar_url);
