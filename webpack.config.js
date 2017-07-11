@@ -44,9 +44,11 @@ module.exports = {
     ],
     extensions: ['.js', '.jsx'],
     alias: {
+      actions: path.resolve(srcDir, 'app/actions'),
       components: path.resolve(srcDir, 'app/components'),
       containers: path.resolve(srcDir, 'app/containers'),
       models: path.resolve(srcDir, 'app/models'),
+      reducers: path.resolve(srcDir, 'app/reducers'),
       mocks: path.resolve(__dirname, 'specs/mocks')
     }
   },

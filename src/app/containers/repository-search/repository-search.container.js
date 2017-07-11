@@ -2,16 +2,13 @@ import React, { Component } from 'react';
 
 import SearchBox from 'components/searchbox';
 import SearchResults from 'components/search-results';
+import { getInitialState } from 'reducers/search.reducer';
 
-import type { IRepository } from 'models/repository.model';
-import type { IOrganization } from 'models/organization.model';
+import type { SearchStateType } from 'reducers/search.reducer';
+
 
 type PropType = {
-  search: {
-    isSearching: boolean;
-    results: Array<IRepository | IOrganization>;
-    text: string;
-  }
+  search: SearchStateType
 };
 
 export class RepositorySearch extends Component<PropType, PropType, void> {
@@ -33,9 +30,5 @@ export class RepositorySearch extends Component<PropType, PropType, void> {
 }
 
 RepositorySearch.defaultProps = {
-  search: {
-    isSearching: false,
-    results: [],
-    text: ''
-  }
+  search: getInitialState()
 };
