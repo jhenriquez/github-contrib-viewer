@@ -9,10 +9,12 @@ module.exports = {
     app: path.resolve(srcDir, 'app', 'root.jsx'),
     vendor: [
       'babel-polyfill',
+      'whatwg-fetch',
       'react',
       'react-dom',
       'redux',
-      'react-redux'
+      'react-redux',
+      'lodash'
     ]
   },
 
