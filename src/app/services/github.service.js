@@ -30,4 +30,13 @@ export default class GithubService {
             .then(orgs => orgs.items.map(this.toOrganization))
           : Promise.resolve([]);
   }
+
+  search (query: string) : Promise<Array<Repository | Organization>> {
+    return query ?
+          Promise.all([
+            this.searchRepositories(query),
+            this.searchOrganizations(query)
+          ]).then((results) => [].concat.apply([], results))
+           : Promise.resolve([]);
+  }
 }
