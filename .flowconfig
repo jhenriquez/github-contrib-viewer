@@ -2,6 +2,7 @@
 .*/node_modules/*
 .*/specs/preProcessWebpackAlias.js
 .*/coverage/*
+.*/public/*
 
 [include]
 
