@@ -55,7 +55,7 @@ module.exports = {
       models: path.resolve(srcDir, 'app/models'),
       reducers: path.resolve(srcDir, 'app/reducers'),
       store: path.resolve(srcDir, 'app/store'),
-      mocks: path.resolve(__dirname, 'specs/mocks')
+      mocks: path.resolve(__dirname, 'mocks')
     }
   },
 

@@ -13,8 +13,8 @@ type PropType = SearchStateType & {
   searchTextChanged?: string=>void
 };
 
-export class RepositorySearch extends Component<SearchStateType, PropType, void> {
-  static defaultProps: SearchStateType;
+export class RepositorySearch extends Component<PropType, PropType, void> {
+  static defaultProps: PropType;
 
   render () {
     return (
@@ -38,4 +38,6 @@ export const mapDispatchToProps = (dispatch: Function) => {
 
 export default connect(mapStateToProps, mapDispatchToProps)(RepositorySearch);
 
-RepositorySearch.defaultProps = getInitialState();
+RepositorySearch.defaultProps = Object.assign({}, getInitialState(), {
+  searchTextChanged: ()=>{}
+});
