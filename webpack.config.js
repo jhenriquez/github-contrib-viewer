@@ -54,6 +54,7 @@ module.exports = {
       middlewares: path.resolve(srcDir, 'app/middlewares'),
       models: path.resolve(srcDir, 'app/models'),
       reducers: path.resolve(srcDir, 'app/reducers'),
+      services: path.resolve(srcDir, 'app/services'),
       store: path.resolve(srcDir, 'app/store'),
       mocks: path.resolve(__dirname, 'mocks')
     }

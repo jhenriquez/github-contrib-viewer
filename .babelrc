@@ -12,6 +12,7 @@
       "middlewares": "./src/app/middlewares",
       "models": "./src/app/models",
       "reducers": "./src/app/reducers",
+      "services": "./src/app/services",
       "store": "./src/app/store",
       "mocks": "./mocks"
     }
