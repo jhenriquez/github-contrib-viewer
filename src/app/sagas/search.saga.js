@@ -8,7 +8,12 @@ import GithubService from 'services/github.service';
 const githubService = new GithubService();
 
 export function* performSearch (action: SearchAction) : * {
-  yield apply(githubService, githubService.search, [action.payload]);
+  try {
+    const results = yield apply(githubService, githubService.search, [action.payload]);
+    yield put(new SearchActions.PerformSearchSuccessAction(results));
+  } catch(error) {
+    yield put(new SearchActions.PerformSearchFailAction(error));
+  }
 }
 
 export function* onTextChanged () : * {
@@ -17,7 +22,9 @@ export function* onTextChanged () : * {
 
 export function* handleTextChanged (action: SearchAction) : * {
   yield call(delay, 1300);
-  yield put(new SearchActions.PerformSearchAction(action.payload));
+  yield put(new SearchActions.PerformSearchAction(
+    typeof action.payload === 'string' ? action.payload : ''
+  ));
 }
 
 export function* onPerformSearch () : * {

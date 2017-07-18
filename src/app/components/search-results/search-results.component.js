@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 
-import type { IRepository } from 'models/repository.model';
-import type { IOrganization } from 'models/organization.model';
-
 import RepositoryResult from './repository-result/repository-result.component';
 import Repository from 'models/repository.model';
 
@@ -10,7 +7,7 @@ import OrganizationResult from './organization-result/organization-result.compon
 import Organization from 'models/organization.model';
 
 type PropType = {
-  results: Array<IRepository | IOrganization>;
+  results: Array<Repository | Organization>;
 };
 
 export default class SearchResults extends Component<PropType, PropType, void> {

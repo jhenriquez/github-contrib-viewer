@@ -5,6 +5,12 @@ import { onTextChanged, handleTextChanged, performSearch } from './search.saga';
 import * as SearchActions from 'actions/search.actions';
 import GithubService from 'services/github.service';
 
+import Repository from 'models/repository.model';
+import Organization from 'models/organization.model';
+
+import mock_repositories from 'mocks/repositories';
+import mock_organizations from 'mocks/organizations';
+
 describe('Saga: Search', () => {
 
   describe('SEARCH_TEXT_CHANGED', () => {
@@ -40,8 +46,23 @@ describe('Saga: Search', () => {
         expect(gen.next().value).toEqual(apply(githubService, githubService.search, [searchText]));
       });
 
-      test('On Success: It dispatches a PERFORM_SEARCH_SUCCESS action.');
-      test('On Error: It dispatches a PERFORM_SEARCH_FAIL action.');
+      test('On Success: It dispatches a PERFORM_SEARCH_SUCCESS action.', () => {
+        const repositories = mock_repositories.map(r => new Repository(r));
+        const organizations = mock_organizations.map(o => new Organization(o));
+        const items = repositories.concat(organizations);
+        const searchText = 'Search Text';
+        const gen = performSearch(new SearchActions.PerformSearchAction(searchText));
+        expect(gen.next().value).toEqual(apply(githubService, githubService.search, [searchText]));
+        expect(gen.next(items).value).toEqual(put(new SearchActions.PerformSearchSuccessAction(items)));
+      });
+
+      test('On Error: It dispatches a PERFORM_SEARCH_FAIL action.', () => {
+        const searchText = 'Search Text';
+        const gen = performSearch(new SearchActions.PerformSearchAction(searchText));
+        expect(gen.next().value).toEqual(apply(githubService, githubService.search, [searchText]));
+        const error = new Error('some error');
+        expect(gen.throw(error).value).toEqual(put(new SearchActions.PerformSearchFailAction(error)));
+      });
     });
 
   });

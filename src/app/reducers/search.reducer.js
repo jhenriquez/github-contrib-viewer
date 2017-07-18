@@ -1,8 +1,8 @@
 import * as SearchActions from 'actions/search.actions';
 
 import type { SearchAction } from 'actions/search.actions';
-import type { IRepository } from 'models/repository.model';
-import type { IOrganization } from 'models/organization.model';
+import Repository from 'models/repository.model';
+import Organization from 'models/organization.model';
 
 export const getInitialState = () => {
   return Object.assign({}, {
@@ -14,7 +14,7 @@ export const getInitialState = () => {
 
 export type SearchStateType = {
   isSearching: boolean;
-  results: Array<IRepository | IOrganization>;
+  results: Array<Repository | Organization>;
   text: string;
 };
 
@@ -22,7 +22,20 @@ const reducer = (state: SearchStateType = getInitialState(), action: SearchActio
   switch(action.type) {
     case SearchActions.SEARCH_TEXT_CHANGED:
       return Object.assign({}, state, {
-        text: action.payload
+        text: typeof action.payload === 'string' ? action.payload : state.text
+      });
+    case SearchActions.PERFORM_SEARCH:
+      return Object.assign({}, state, {
+        isSearching: true
+      });
+    case SearchActions.PERFORM_SEARCH_FAIL:
+      return Object.assign({}, state, {
+        isSearching: false
+      });
+    case SearchActions.PERFORM_SEARCH_SUCCESS:
+      return Object.assign({}, state, {
+        isSearching: false,
+        results: Array.isArray(action.payload) ? action.payload : state.results
       });
     default:
       return state;
