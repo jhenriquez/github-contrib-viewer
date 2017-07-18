@@ -1,5 +1,6 @@
-import { put, takeEvery, throttle, apply } from 'redux-saga/effects';
-import { watchTextChanged, handleTextChanged, throttleSearchTextAction, performSearch } from './search.saga';
+import { delay } from 'redux-saga';
+import { put, apply, call, takeLatest } from 'redux-saga/effects';
+import { onTextChanged, handleTextChanged, performSearch } from './search.saga';
 
 import * as SearchActions from 'actions/search.actions';
 import GithubService from 'services/github.service';
@@ -8,28 +9,28 @@ describe('Saga: Search', () => {
 
   describe('SEARCH_TEXT_CHANGED', () => {
 
-    describe('watchTextChanged', () => {
-      test('throttleSearchTextAction: it throttles handleTextChanged', () => {
-        const searchTextChanged = new SearchActions.SearchTextChanged('Some Text');
-        const gen = throttleSearchTextAction(searchTextChanged);
-        expect(gen.next().value).toEqual(throttle(400, searchTextChanged.type, handleTextChanged, searchTextChanged));
-      });
-
-      test('It throttles (via throttleSearchTextAction helper) the search event', () => {
-        const gen = watchTextChanged();
-        expect(gen.next().value).toEqual(takeEvery(SearchActions.SEARCH_TEXT_CHANGED, throttleSearchTextAction, new SearchActions.SearchTextChanged('')));
+    describe('onTextChanged', () => {
+      test('It listens for SEARCH_TEXT_CHANGE dispatches a handleTextChanged taking always the latest.',  () => {
+        const gen = onTextChanged();
+        expect(gen.next().value).toEqual(takeLatest(SearchActions.SEARCH_TEXT_CHANGED, handleTextChanged));
       });
     });
 
     describe('handleTextChanged', () => {
+      test('It waits 1300 seconds.', () => {
+        const gen = handleTextChanged(new SearchActions.SearchTextChanged(''));
+        expect(gen.next().value).toEqual(call(delay, 1300));
+      });
+
       test('It dispatches a PERFORM_GITHUB_SEARCH event, with the payload from SEARCH_TEXT_CHANGED', () => {
         const searchText = 'Some Text';
         const gen = handleTextChanged(new SearchActions.SearchTextChanged(searchText));
+        expect(gen.next().value).toEqual(call(delay, 1300));
         expect(gen.next().value).toEqual(put(new SearchActions.PerformSearchAction(searchText)));
       });
     });
 
-    describe('performSearch', () => {
+    describe('onPerformSearch', () => {
 
       const githubService = new GithubService();
 

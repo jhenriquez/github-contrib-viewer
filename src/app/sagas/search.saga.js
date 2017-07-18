@@ -1,4 +1,5 @@
-import { throttle, put, takeEvery, takeLatest, apply } from 'redux-saga/effects';
+import { delay } from 'redux-saga';
+import { put, takeLatest, call, apply, all } from 'redux-saga/effects';
 
 import * as SearchActions from 'actions/search.actions';
 import type { SearchAction } from 'actions/search.actions';
@@ -10,18 +11,22 @@ export function* performSearch (action: SearchAction) : * {
   yield apply(githubService, githubService.search, [action.payload]);
 }
 
-export function* watchTextChanged () : * {
-  yield takeEvery(SearchActions.SEARCH_TEXT_CHANGED , throttleSearchTextAction, new SearchActions.SearchTextChanged(''));
-}
-
-export function* throttleSearchTextAction (action: SearchAction) : * {
-  yield throttle(400, action.type, handleTextChanged, action);
+export function* onTextChanged () : * {
+  yield takeLatest(SearchActions.SEARCH_TEXT_CHANGED, handleTextChanged);
 }
 
 export function* handleTextChanged (action: SearchAction) : * {
+  yield call(delay, 1300);
   yield put(new SearchActions.PerformSearchAction(action.payload));
 }
 
-export function* watchPerformSearch () : * {
-  yield takeLatest(SearchActions.PERFORM_SEARCH, performSearch, new SearchActions.SearchTextChanged(''));
+export function* onPerformSearch () : * {
+  yield takeLatest(SearchActions.PERFORM_SEARCH, performSearch);
+}
+
+export default function* SearchSaga () : * {
+  yield all([
+    onPerformSearch(),
+    onTextChanged()
+  ]);
 }

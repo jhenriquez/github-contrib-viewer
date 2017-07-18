@@ -1,9 +1,14 @@
 import { createStore, applyMiddleware } from 'redux';
 
 import { default as reducers } from 'reducers/index';
+
 import { getInitialState as getSearchInitialState } from 'reducers/search.reducer';
+
 import classToPlainObject from 'middlewares/classToPlainObject';
+
 import { composeWithDevTools } from 'redux-devtools-extension';
+
+import sagasEngine from './sagas';
 
 import type { SearchStateType } from 'reducers/search.reducer';
 
@@ -19,6 +24,8 @@ export const getApplicationInitialState = () : ApplicationState => {
 
 export const configureStore = (initialState: ApplicationState = getApplicationInitialState()) : any => {
   return createStore(reducers, initialState, composeWithDevTools(
-    applyMiddleware(classToPlainObject)
+    applyMiddleware(classToPlainObject, sagasEngine)
   ));
 };
+
+export { RunSagas } from './sagas';

@@ -6,10 +6,14 @@ import reactDOM  from 'react-dom';
 import { Provider } from 'react-redux';
 
 import RepositorySearch from 'containers/repository-search';
-import { configureStore } from 'store/index';
+import { configureStore, RunSagas } from 'store/index';
+
+const store = configureStore();
+
+RunSagas();
 
 reactDOM.render(
-  <Provider store={ configureStore() }>
+  <Provider store={ store }>
     <RepositorySearch />
   </Provider>,
   document.getElementById('content')
