@@ -1,16 +1,21 @@
 import React, { Component } from 'react';
 
-import type { IOrganization } from 'models/organization.model';
+import Organization from 'models/organization.model';
 
 type PropType = {
-  org: IOrganization
+  org: Organization;
 };
 
 export default class OrganizationResult extends Component<void, PropType, void> {
   render () {
     return (
       <div className="search-results__item">
-        <h3>{ this.props.org.login }</h3>
+        <div className="card">
+          <div className="card-block">
+            <h4 className="card-title">{ this.props.org.login }</h4>
+            <p className="card-text">{ this.props.org.description }</p>
+          </div>
+        </div>
       </div>
     );
   }

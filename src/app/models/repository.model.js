@@ -5,6 +5,7 @@ export type IRepository = {
   createdAt: Date;
   updatedAt: Date;
   name: string;
+  description: string;
 };
 
 export default class Repository {
@@ -14,6 +15,8 @@ export default class Repository {
   createdAt: Date;
   updatedAt: Date;
   name: string;
+  description: string;
+  login: string;
 
   constructor (repository: any) {
     this.id = repository.id;
@@ -21,6 +24,8 @@ export default class Repository {
     this.contributorsUrl = repository.contributors_url;
     this.createdAt = repository.created_at;
     this.updatedAt = repository.updated_at;
-    this.name = repository.full_name;
+    this.name = repository.name;
+    this.description = repository.description;
+    this.login = repository.owner.login;
   }
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import './repository-search.container.css';
 import SearchBox from 'components/searchbox';
 import SearchResults from 'components/search-results';
 import { getInitialState } from 'reducers/search.reducer';

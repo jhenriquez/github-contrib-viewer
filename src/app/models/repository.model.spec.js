@@ -14,7 +14,9 @@ describe('Model: Repository', () => {
       expect(repository.contributorsUrl).toEqual(mockRepository.contributors_url);
       expect(repository.createdAt).toEqual(mockRepository.created_at);
       expect(repository.updatedAt).toEqual(mockRepository.updated_at);
-      expect(repository.name).toEqual(mockRepository.full_name);
+      expect(repository.name).toEqual(mockRepository.name);
+      expect(repository.description).toEqual(mockRepository.description);
+      expect(repository.login).toEqual(mockRepository.owner.login);
     });
 
   });
