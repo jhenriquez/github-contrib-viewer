@@ -19,6 +19,7 @@ export default class SearchBox extends Component<PropType, PropType, void> {
       <div className="searchbox">
         <input
           className="searchbox__input"
+          placeholder="Search on Github"
           value={ this.props.value }
           onChange={ this.onChange.bind(this) }>
         </input>

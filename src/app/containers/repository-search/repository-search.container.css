@@ -7,6 +7,10 @@
 
 .searchbox__input {
   width: 100%;
+  border: none;
+  background-color: #D9D9D9;
+  height: 3em;
+  padding: 1em;
 }
 
 .search-results {
@@ -24,4 +28,8 @@
 .search-results__item .card {
   min-height: 150px;
   max-height: 150px;
+}
+
+.search-results__item .card:hover {
+  border-color: #D7F3FF;
 }
