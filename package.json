@@ -37,6 +37,7 @@
     "webpack-dev-server": "^2.5.1"
   },
   "dependencies": {
+    "identity-obj-proxy": "^3.0.0",
     "lodash": "^4.17.4",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
@@ -48,5 +49,10 @@
   "eslintIgnore": [
     "flow-typed/",
     "coverage/"
-  ]
+  ],
+  "jest": {
+    "moduleNameMapper": {
+      "\\.css$": "identity-obj-proxy"
+    }
+  }
 }
