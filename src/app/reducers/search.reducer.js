@@ -22,10 +22,7 @@ const reducer = (state: SearchStateType = getInitialState(), action: SearchActio
   switch(action.type) {
     case SearchActions.SEARCH_TEXT_CHANGED:
       return Object.assign({}, state, {
-        text: typeof action.payload === 'string' ? action.payload : state.text
-      });
-    case SearchActions.PERFORM_SEARCH:
-      return Object.assign({}, state, {
+        text: typeof action.payload === 'string' ? action.payload : state.text,
         isSearching: true
       });
     case SearchActions.PERFORM_SEARCH_FAIL:
