@@ -9,7 +9,7 @@ const githubService = new GithubService();
 
 export function* performSearch (action: SearchAction) : * {
   try {
-    const results = yield apply(githubService, githubService.search, [action.payload]);
+    const results = yield apply(githubService, githubService.searchRepositories, [action.payload]);
     yield put(new SearchActions.PerformSearchSuccessAction(results));
   } catch(error) {
     yield put(new SearchActions.PerformSearchFailAction(error));

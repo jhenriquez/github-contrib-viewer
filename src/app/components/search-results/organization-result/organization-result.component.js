@@ -11,8 +11,11 @@ export default class OrganizationResult extends Component<void, PropType, void> 
     return (
       <div className="search-results__item">
         <div className="card">
+          <div className="card-header">
+            <span>{ this.props.org.login }</span>
+            <span className="card-header__badge badge badge-danger">Organization</span>
+          </div>
           <div className="card-block">
-            <h4 className="card-title">{ this.props.org.login }</h4>
             <p className="card-text">{ this.props.org.description }</p>
           </div>
         </div>

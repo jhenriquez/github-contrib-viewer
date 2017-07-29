@@ -1,8 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import { Provider } from 'react-redux';
 
-import { default as RepositorySearchDefault, RepositorySearch, mapStateToProps, mapDispatchToProps } from './repository-search.container';
+import { RepositorySearch, mapStateToProps, mapDispatchToProps } from './repository-search.container';
 import SearchBox from 'components/searchbox';
 import SearchResults from 'components/search-results';
 import { getApplicationInitialState } from 'store/index';

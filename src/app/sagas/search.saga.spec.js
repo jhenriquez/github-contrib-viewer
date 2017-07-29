@@ -43,7 +43,7 @@ describe('Saga: Search', () => {
       test('It calls on the github service to search for the given payload.', () => {
         const searchText = 'Search Text';
         const gen = performSearch(new SearchActions.PerformSearchAction(searchText));
-        expect(gen.next().value).toEqual(apply(githubService, githubService.search, [searchText]));
+        expect(gen.next().value).toEqual(apply(githubService, githubService.searchRepositories, [searchText]));
       });
 
       test('On Success: It dispatches a PERFORM_SEARCH_SUCCESS action.', () => {
@@ -52,14 +52,14 @@ describe('Saga: Search', () => {
         const items = repositories.concat(organizations);
         const searchText = 'Search Text';
         const gen = performSearch(new SearchActions.PerformSearchAction(searchText));
-        expect(gen.next().value).toEqual(apply(githubService, githubService.search, [searchText]));
+        expect(gen.next().value).toEqual(apply(githubService, githubService.searchRepositories, [searchText]));
         expect(gen.next(items).value).toEqual(put(new SearchActions.PerformSearchSuccessAction(items)));
       });
 
       test('On Error: It dispatches a PERFORM_SEARCH_FAIL action.', () => {
         const searchText = 'Search Text';
         const gen = performSearch(new SearchActions.PerformSearchAction(searchText));
-        expect(gen.next().value).toEqual(apply(githubService, githubService.search, [searchText]));
+        expect(gen.next().value).toEqual(apply(githubService, githubService.searchRepositories, [searchText]));
         const error = new Error('some error');
         expect(gen.throw(error).value).toEqual(put(new SearchActions.PerformSearchFailAction(error)));
       });
