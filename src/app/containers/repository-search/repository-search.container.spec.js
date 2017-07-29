@@ -3,6 +3,7 @@ import { mount } from 'enzyme';
 
 import { RepositorySearch, mapStateToProps, mapDispatchToProps } from './repository-search.container';
 import SearchBox from 'components/searchbox';
+import Loader from 'components/loader';
 import SearchResults from 'components/search-results';
 import { getApplicationInitialState } from 'store/index';
 import { getInitialState } from 'reducers/search.reducer';
@@ -37,6 +38,15 @@ describe('RespositorySearch', () => {
         expect(searchBox.props().onChange).toBeDefined();
       });
 
+    });
+
+    describe('<Loader />', () => {
+      test('It renders a <Loader /> component when "isSearching"', () => {
+        const component = mount(<RepositorySearch />);
+        expect(component.find(Loader)).toHaveLength(0);
+        component.setProps({ isSearching: true });
+        expect(component.find(Loader)).toHaveLength(1);
+      });
     });
 
     describe('<SearchResults />', () => {

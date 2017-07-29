@@ -1,7 +1,9 @@
+import './repository-search.container.css';
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import './repository-search.container.css';
 import SearchBox from 'components/searchbox';
+import Loader from 'components/loader';
 import SearchResults from 'components/search-results';
 import { getInitialState } from 'reducers/search.reducer';
 import * as SearchActions from 'actions/search.actions';
@@ -20,6 +22,7 @@ export class RepositorySearch extends Component<PropType, PropType, void> {
     return (
       <div className="repository-search">
         <SearchBox value={ this.props.text } onChange={ this.props.searchTextChanged  } />
+        { this.props.isSearching ? <Loader /> : null }
         <SearchResults results={ this.props.results } />
       </div>
     );
