@@ -2,6 +2,7 @@ export const SEARCH_TEXT_CHANGED = '[Search] Text Changed';
 export const PERFORM_SEARCH = '[Search] Perform Search';
 export const PERFORM_SEARCH_SUCCESS = '[Search] Perform Search Success';
 export const PERFORM_SEARCH_FAIL = '[Search] Perform Search Fail';
+export const DEFAULT = '[Search] Default';
 
 import Repository from 'models/repository.model';
 import Organization from 'models/organization.model';
@@ -44,7 +45,15 @@ export class PerformSearchFailAction {
   }
 }
 
+export class DefaultAction {
+  type: string;
+  constructor () {
+    this.type = DEFAULT;
+  }
+}
+
 export type SearchAction = SearchTextChanged
                         | PerformSearchAction
                         | PerformSearchSuccessAction
-                        | PerformSearchFailAction;
+                        | PerformSearchFailAction
+                        | DefaultAction;
