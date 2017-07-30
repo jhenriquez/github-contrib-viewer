@@ -8,7 +8,7 @@ type PropType = {
 
 export default class RepositoryResult extends Component<void, PropType, void> {
   truncateText (text: string) : string {
-    return text && text.length > 75 ? `${text.substr(0,75)}...` : text;
+    return text && text.length > 65 ? `${text.substr(0,65)}...` : text;
   }
 
   render () {
